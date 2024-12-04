@@ -62,7 +62,6 @@ function checkSafety(numbers, direction) {
     
     if (difference < 1 || difference > 3) {
       problemIndices.push(i, i+1);
-      safe = false;
     }
   }
 

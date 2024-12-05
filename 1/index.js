@@ -1,4 +1,4 @@
-const data = require('./data.json');
+import data from './data.json' with { type: 'json' };
 
 (() => {
   let total = 0;

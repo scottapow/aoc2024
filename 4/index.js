@@ -1,13 +1,5 @@
 import rows from './data.json' with { type: 'json' };
-const input = rows.map(row => row.split(''));
 const WORD = 'XMAS';
-// const letterMap = createLetterMap(input, WORD);
-
-const directions = [
-  [-1, -1], [0, -1], [1, -1],
-  [-1, 0], [1, 0],
-  [-1, 1], [0, 1], [1, 1],
-];
 
 /**
  * @typedef {number} RowIndex
@@ -18,6 +10,11 @@ const directions = [
 (() => {
   let total = 0;
 
+  const directions = [
+    [-1, -1], [0, -1], [1, -1],
+    [-1, 0], [1, 0],
+    [-1, 1], [0, 1], [1, 1],
+  ];
   rows.forEach((row, rowIndex) => {
     row.split('').forEach((letter, colIndex) => {
       if (WORD[0] === letter) {
@@ -45,6 +42,28 @@ console.log('-----------------------');
 // Part 2
 (() => {
   let total = 0;
+
+  const directions = [
+    [-1, -1], [1, -1],
+    [-1, +1], [1, +1],
+  ];
+  rows.forEach((row, rowIndex) => {
+    row.split('').forEach((letter, colIndex) => {
+      if (letter === 'A') {
+        let masses = 0;
+        directions.forEach(([x, y]) => {
+          if (rows[rowIndex + y]?.[colIndex + x] === 'M') {
+            if (rows[rowIndex + (y * -1)]?.[colIndex + (x * -1)] === 'S') {
+              masses++;
+            }
+           }
+        });
+        if (masses === 2) {
+          total++;
+        }
+      }
+    })
+  })
 
   console.log('Day 4 Part 2: ', total);
 })();
